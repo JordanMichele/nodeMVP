@@ -1,1 +1,44 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Node MVP</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script
+  src="https://code.jquery.com/jquery-1.12.4.js"
+  integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+  crossorigin="anonymous">
+  </script>
+  </head>
+  <body>
+    <h1>Make an AJAX call!!!</h1>
+
+    <button id="getButton">Click for a GET REQ</button>
+
+    <pre id="getResponse"></pre>
+
+    <script type="text/javascript">
+
+        $('#getButton').click(function(){
+         $("pre").toggle();
+         return getData();
+        });
+
+      function getData() {
+        $.ajax({
+          type: 'GET',
+          url: 'http://localhost:8000/ajaxcall',
+          dataType: 'json'
+        })
+        .done(function(data){
+          $('#getResponse').html(JSON.stringify(data, "", 10));
+        })
+        .fail(function(jqXHR, textStatus, err){
+          console.log('AJAX error response:', textStatus)
+        });
+      }
+
+    </script>
+
+  </body>
+</html>
